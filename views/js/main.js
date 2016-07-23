@@ -423,7 +423,10 @@ var resizePizzas = function(size) {
 
    // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    var pizzaContainerSelector = document.querySelectorAll(".randomPizzaContainer");
+    // This is the better way to query the document instead of querySelector
+    var pizzaContainerSelector = document.getElementsByClassName("randomPizzaContainer");
+    // Removed the call to identify the delta width and then adding that to the previous width
+    // Instead NewWidth is know beforehand and can be used accordingly
     var newwidth;
     switch(size) {
         case "1":
@@ -489,14 +492,21 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  // Identify the scroll position of the page outside the loop
   var bodyScroll = document.body.scrollTop;
+
+  // Store all the phase numbers seperately instead of calculating them within the for loop
   var phaseArr = new Array(5);
   for(i = 0; i < 5; i++){
     phaseArr[i] = Math.sin((bodyScroll / 1250) + (i % 5));
   }
+
+  // Iterate on the movers object to change their position on scroll
   for (var i = 0; i < items.length; i++) {
     var phase = phaseArr[i % 5];
+    // calculate the position of the moving pizzas
     var pos = items[i].basicLeft + 100 * phase + 'px';
+    // Use style.transform instead of style.left as it is a better way to change the position of the element
     items[i].style.transform = 'translateX(' + pos + ')';
   }
 
@@ -512,6 +522,8 @@ function updatePositions() {
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
+// Since the mover elements stays constant, it is better to identify them as a global scope
+// rather than querrying the document on every scroll
 var items = document.getElementsByClassName('mover');
 
 // Generates the sliding pizzas when the page loads.
@@ -524,6 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
+    // Minus 690 is done to fix the alignment issues due to style.transform
     elem.basicLeft = (i % cols) * s - 690;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
