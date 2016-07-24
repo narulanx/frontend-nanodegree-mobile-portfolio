@@ -52,7 +52,17 @@ The method changePizzaSizes() in file views/js/main.js is modified to compute th
 New time to resize the pizza using pizza slider ranges between 0.865ms - 2.27ms
 
 Optimizations done to achieve this -
+* Replace document.querySelector with document.getElementById in changeSliderLabel() function
 * Move the call to identify all the pizzas with class 'randomPizzaContainer' outside the for loop
 * Use document.getElementsByClassName instead of document.querySelectoryAll to identify all the pizza elements
 * Remove the code that identifies the delta width and adds it to the previous width
 * Since we know the NewWidth beforehand, use it as percentage width on the pizza styles
+
+####General Optimizations in views/js/main.js on page load of views/pizza.html
+
+* Move the call to identify 'randomPizzas' id element outside the for loop
+* Move the call to identify 'movingPizzas1' id element outside the for loop
+* Replace document.querySelectorAll with document.getElementById for moving pizzas element
+* Calculate the window width and height and using that identify the number of columns and rows
+* Use the number of columns and rows to calculate the number of moving pizzas element
+* Subtract the Moving Pizzas's basicLeft value by 690 to fix the alignment issues due to transform property
