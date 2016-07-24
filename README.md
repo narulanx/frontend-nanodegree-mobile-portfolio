@@ -49,7 +49,7 @@ Optimizations done to reach the frame rate of 60 fps -
 
 The method changePizzaSizes() in file views/js/main.js is modified to compute the time to resize pizza in less than 5ms using the pizza slider on the views/pizza.html page.
 
-New time to resize the pizza using pizza slider - 0.865ms
+New time to resize the pizza using pizza slider ranges between 0.865ms - 2.27ms
 
 Optimizations done to achieve this -
 * Move the call to identify all the pizzas with class 'randomPizzaContainer' outside the for loop
