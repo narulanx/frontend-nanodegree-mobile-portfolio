@@ -537,10 +537,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 3;
   if (winWidth > 1500)
     cols = 8;
-  else if (winWidth > 1300)
-    cols = 6;
   else if (winWidth > 1200)
-    cols = 5;
+    cols = 6;
   else if (winWidth > 850)
     cols = 4;
   var rows = Math.ceil(winHeight / s);
